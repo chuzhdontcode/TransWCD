@@ -1,0 +1,3 @@
+torchmetrics>=1.3.0, <=1.4.0
+pytorch-metric-learning==2.3.0
+pandas

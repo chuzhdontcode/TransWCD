@@ -2,10 +2,12 @@
 
 from setuptools import setup, find_packages
 
+
 # Read the requirements from requirements.txt
 def parse_requirements(filename):
     with open(filename, "r") as file:
         return [line.strip() for line in file if line.strip() and not line.startswith("#")]
+
 
 setup(
     name="transwcd",
@@ -15,6 +17,9 @@ setup(
     author_email="",
     # REPLACE WITH YOUR OWN GITHUB PROJECT LINK
     url="",
-    install_requires=parse_requirements("transwcd/requirements/base.txt"),
     packages=find_packages(),
+    install_requires=parse_requirements("transwcd/requirements/base.txt"),
+    extras_require={
+        "fastvit": parse_requirements("transwcd/requirements/fastvit_metric_vte.txt"),
+    },
 )
