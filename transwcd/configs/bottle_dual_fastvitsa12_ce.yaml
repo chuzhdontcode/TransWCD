@@ -1,0 +1,77 @@
+backbone:
+  config: fastvit_sa12
+  stride: None
+  comments: None
+  drop: 0.0
+  drop_connect: None
+  drop_path: 0.0
+  drop_block: None
+  gp: None
+  bn_tf: False
+  bn_momentum: None
+  bn_eps: None
+  torchscript: False
+  initial_checkpoint: ""
+  use_inference_mode: False
+  embedding_dim: [64, 128, 256, 512]
+
+scheme: transwcd_dual # transwcd_single, transwcd_dual
+
+loss: cross_entropy # triplet, contrastive, cross_entropy
+
+dataset:
+  root_dir: /home/jovyan/change_detection/data/bottle-CD-256
+  name_list_dir: datasets/bottle-CD-256
+  num_classes: 2
+  crop_size: 256
+  rescale_range: [1.0, 1.0]
+
+
+work_dir:
+  dir: work_dir_bottle_dual_fastvitsa12_ce
+  ckpt_dir: checkpoints
+  pred_dir: predictions
+  logger_dir: logger
+
+train:
+  split: train
+  batch_size: 8
+  max_iters: 50000
+  cam_iters: 2000
+  eval_iters: 500
+  log_iters: 500
+
+cam:
+  bkg_score: 0.45
+  scales: [1, 0.5, 1.5]
+
+val:
+  split: val
+  batch_size: 1
+
+test:
+  split: test
+  batch_size: 1
+
+hyperparam: fastvit
+opt: adamw
+lr: 1e-5
+weight_decay: 0.05
+momentum: 0.9
+
+sched: cosine
+epochs: 2000
+decay_epochs: 667
+warmup_epochs: 33
+cooldown_epochs: 67
+patience_epochs: 67
+decay_rate: 0.1
+min_lr: 1e-6
+warmup_lr: 1e-7
+lr_noise_pct: 0.67
+lr_noise_std: 1.
+lr_cycle_mul: 1.
+lr_cycle_decay: 0.5
+lr_cycle_limit: 1
+lr_k_decay: 1.0
+eval_metric: top1

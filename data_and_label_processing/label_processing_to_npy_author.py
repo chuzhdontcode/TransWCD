@@ -5,20 +5,12 @@ import os
 import numpy as np
 import cv2
 import natsort
-import argparse
-from pathlib import Path
-import shutil 
 
-
-parser = argparse.ArgumentParser()
-parser.add_argument("--file_path", default="/data/zhenghui.zhao/Dataset/Change Detection/WHU-CD-256/label", type=str, help="file_path")
-parser.add_argument("--save_path", default="/data/zhenghui.zhao/Dataset/Change Detection/WHU-CD-256", type=str, help="save_path")
 
 
 if __name__ == "__main__":
-    args = parser.parse_args()
-    file_path = args.file_path
-    save_path = args.save_path
+    file_path = '/data/zhenghui.zhao/Dataset/Change Detection/WHU-CD-256/label'
+    save_path = '/data/zhenghui.zhao/Dataset/Change Detection/WHU-CD-256'
     file_list = os.listdir(file_path)
     inList = natsort.natsorted(file_list)
 
@@ -53,9 +45,4 @@ if __name__ == "__main__":
     print(label)
     print('save_image_path:', save_path+'/imagelevel_labels.npy')
 
-    # Create datasets/ with split.txt and .npy
-    datasets_path = "../transwcd/datasets/" + save_path.split("/")[-1]
-    Path(datasets_path).mkdir(parents=True, exist_ok=True)
 
-    shutil.copytree(save_path+"/list", datasets_path, dirs_exist_ok=True)
-    shutil.copy(save_path+"/imagelevel_labels.npy", datasets_path+"/imagelevel_labels.npy")

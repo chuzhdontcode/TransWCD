@@ -1,0 +1,55 @@
+backbone:
+  config: mit_b1
+  stride: [4, 2, 2, 1]
+  comments: None
+  embedding_dim: 256
+
+scheme: transwcd_dual # transwcd_single, transwcd_dual
+
+loss: triplet # triplet, contrastive, cross_entropy
+
+dataset:
+  root_dir: /home/jovyan/change_detection/data/bottle-CD-256
+  name_list_dir: datasets/bottle-CD-256
+  num_classes: 2
+  crop_size: 256
+  rescale_range: [1.0, 1.0]
+
+
+work_dir:
+  dir: work_dir_bottle_dual_mitb1_triplet
+  ckpt_dir: checkpoints
+  pred_dir: predictions
+  logger_dir: logger
+
+train:
+  split: train
+  batch_size: 8
+  max_iters: 50000
+  cam_iters: 2000
+  eval_iters: 500
+  log_iters: 500
+
+cam:
+  bkg_score: 0.45
+  scales: [1, 0.5, 1.5]
+
+val:
+  split: val
+  batch_size: 1
+
+test:
+  split: test
+  batch_size: 1
+
+hyperparam: transwcd
+optimizer:
+  type: AdamW
+  learning_rate: 6e-5 #5e-5
+  betas: [0.9, 0.999]
+  weight_decay: 0.01
+
+scheduler:
+  warmup_iter: 1500
+  warmup_ratio: 1e-6
+  power: 1.0
