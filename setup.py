@@ -15,6 +15,6 @@ setup(
     author_email="",
     # REPLACE WITH YOUR OWN GITHUB PROJECT LINK
     url="",
-    install_requires=parse_requirements("transwcd/requirements.txt"),
+    install_requires=parse_requirements("transwcd/requirements/base.txt"),
     packages=find_packages(),
 )
